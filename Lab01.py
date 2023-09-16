@@ -17,7 +17,7 @@ import os
 X = 'X'
 O = 'O'
 BLANK = ' '
-
+save_file = 'save.json'
 # A blank Tic-Tac-Toe board. We should not need to change this board;
 # it is only used to reset the board to blank. This should be the format
 # of the code in the JSON file.
@@ -39,7 +39,9 @@ def read_board(filename):
 
 def save_board(filename, board):
     '''Save the current game to a file.'''
-    # Put file writing code here.
+    f = open(filename, "w")
+    json.dump(board, f)
+    f.close()
 
 def display_board(board):
     '''Display a Tic-Tac-Toe board on the screen in a user-friendly way.'''
@@ -51,14 +53,25 @@ def display_board(board):
 
 def is_x_turn(board):
     '''Determine whose turn it is.'''
-    # Put code here determining if it is X's turn.
+    x_count = 0
+    for i in board:
+        if i != BLANK:
+            x_count += 1
+    if x_count % 2 != 0:
+        return False
     return True
 
 def play_game(board):
     '''Play the game of Tic-Tac-Toe.'''
     display_board(board)
-    is_x_turn(board)
-    save_board('')
+    selection = None 
+    if is_x_turn(board):
+        selection = int(input("It is X's turn:"))
+        board[selection-1] = X
+    else:
+        selection = int(input("It is O's turn:"))
+        board[selection-1] = O
+    save_board(save_file,board)
     return False
 
 def game_done(board, message=False):
@@ -115,9 +128,9 @@ print("The current board is:")
 #done
 # The file read code, game loop code, and file close code goes here.
 if __name__ == "__main__":
-    board = read_board('save.json')
+    board = read_board(save_file)
     while not game_done(board):
-        play_game(board)
+        play_game(board,True)
     
     
         
