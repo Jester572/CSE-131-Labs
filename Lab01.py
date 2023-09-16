@@ -40,7 +40,8 @@ def read_board(filename):
 def save_board(filename, board):
     '''Save the current game to a file.'''
     f = open(filename, "w")
-    json.dump(board, f)
+    save_info = {"board": board}
+    json.dump(save_info, f)
     f.close()
 
 def display_board(board):
@@ -65,13 +66,33 @@ def play_game(board):
     '''Play the game of Tic-Tac-Toe.'''
     display_board(board)
     selection = None 
+    #X's turn 
     if is_x_turn(board):
-        selection = int(input("It is X's turn:"))
-        board[selection-1] = X
+        selection = input("It is X's turn:")
+        if selection == "q":
+            save_board(save_file,board)
+            return True
+        else:
+            selection = int(selection)
+            
+        if board[selection - 1] == BLANK:
+            board[selection - 1] = X
+        else:
+            print("That spot is already taken please choose another")
+    #O's Turn
     else:
-        selection = int(input("It is O's turn:"))
-        board[selection-1] = O
-    save_board(save_file,board)
+        selection = input("It is O's turn:")
+        if selection == "q":
+            save_board(save_file,board)
+            return True
+        else:
+            selection = int(selection)
+            
+        if board[selection - 1] == BLANK:
+            board[selection - 1] = O
+        else:
+            print("That spot is already taken please choose another")
+            
     return False
 
 def game_done(board, message=False):
@@ -129,8 +150,12 @@ print("The current board is:")
 # The file read code, game loop code, and file close code goes here.
 if __name__ == "__main__":
     board = read_board(save_file)
-    while not game_done(board):
-        play_game(board,True)
-    
+    while not game_done(board, True):
+        if play_game(board):
+            print('Game Successfully Saved! Goodbye')
+            break
+        
+    else:
+        save_board(save_file,blank_board["board"])
     
         
