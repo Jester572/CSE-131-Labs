@@ -7,7 +7,7 @@
 # 4. What was the hardest part? Be as specific as possible.
 #      Remembering how to handle errors.
 # 5. How long did it take for you to complete the assignment?
-#      4 Hours
+#      4 Hours9+8
 
 def main():
     
@@ -23,23 +23,22 @@ def get_month():
         try:
             month = int(input('Provide the numerical month you would like to view. ie 1-Jan, 2-Feb, ... 12-Dec: '))
             if isinstance(month, int) and month > 0 and month < 13:
-                return False
+                return month
             else:
                 print('chose a number between 1 and 12')
         except:
             print('Please chose an integer')
-    return month
 def get_year():
     while True:
         try:
             year = int(input('Provide the four digit Year you would like to use: '))
             if isinstance(year, int) and year >= 1753:
-                return False
+                return year
             else:
                  print('Chose a year equal to or greater than 1753')
         except:
             print('Chose a year equal to or greater than 1753')
-    return year
+    
 def display(month, year):
     offset = compute_offset(month, year)
     num_days = days_month(month, year)
