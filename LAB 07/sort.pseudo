@@ -1,0 +1,95 @@
+/** 
+How long did it take for you to complete this assignment?
+    4 hours
+What was the hardest part of the assignment?
+    Trying to remember algorithmic efficiency. I also struggled computing the cohesion and coupling
+    I tried my best to remember and put everything the way it was suppose to go.
+Was there anything unclear about the instructions or how you were to complete this lab?
+    No i don't think so
+**/
+
+sort_array(source_array)
+
+    //Creates the source array and an empty array
+    array_size => length(source_array)                                                                              // O(n)
+    destination_array = [0] ...array_size                                                                           // O(n)
+    number -> 2                                                                                                     // O(1)
+
+    //Sort loop array
+    while (number > 2) {                                                                                            // O(n log n)
+        number -> 0
+        source1_begin = 0
+
+        //Create sub arrays
+        while (source1_begin < array_size) {                                                                        // O(n)
+            source1_end = source1_begin + 1
+            while (source1_end < array_size and source_array[source1_end - 1] <= source_array[source1_end]) {       // O(n)
+                source1_end add 1
+            }
+
+            source2_begin = source1_end
+
+            if (source2_begin < array_size) {
+                source2_end = source2_begin + 1
+            }
+            else {
+                source2_end = source2_begin
+            }
+
+
+            while (source2_end < array_size and source_array[source2_end - 1] <= source_array[source2_end]) {       // O(n)
+                source2_end add 1
+            }
+
+            number add 1
+
+            source1 = (source1_begin, source1_end)                                                                  
+            source2 = (source2_begin, source2_end)
+            
+            //Calls function to combine source1 and source2
+            combine_subArrays(source_array, destination_array, source1, source2)
+            source1_begin = source2_end                                                                             
+
+        }
+        //swap array
+        source_array, destination_array = destination_array, source_array                                           // O(n)
+    }
+    return the source_array                                                                                         // O(1)
+
+
+combine_subArrays(source_array, destination_array, source1, source2)
+
+    source1_end = source2_begin
+
+    // Iterate through the length of arrays
+    for (source1_begin ...source2_end) {                                                                            // O(n)
+        
+        if (source1_begin < source1_end) and (source2_begin == source2_end or source_array[source1_begin] < source_array[source2_begin]) {
+            destination_array[iteration] = source_array[source1_begin]
+            source1_begin add 1
+        }
+
+        else {
+            destination_array[iteration] = source_array[source2_begin]
+            source2_begin add 1
+        }
+    }
+    return the destination_array                                                                                    // O(n)
+
+
+
+
+
+    /** Test Cases **/
+/**
+
+Empty_Array([])
+Positive_Numbers([5,6,1,23,48,15])
+Negative_Numbers([-1,-8,-47,-23])
+Negative_and_Positive([6,-25,13,5,-36,-5,13])
+Reversed_Order([6,5,4,3,2,1])
+In_Order([1,2,3,4,5,6])
+Decimals([.2,.9,.7,.4,.13])
+Strings(["Hello","Apple","Orange","Goodbye", "Blue"])
+
+**/

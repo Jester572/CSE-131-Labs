@@ -1,13 +1,13 @@
 # 1. Name:
-#      -your name-
+#      -Jesse Earley-
 # 2. Assignment Name:
 #      Lab 01: Tic-Tac-Toe
 # 3. Assignment Description:
 #      Play the game of Tic-Tac-Toe
 # 4. What was the hardest part? Be as specific as possible.
-#      -a paragraph or two about how the assignment went for you-
+#      -Learning what code has been given and how to utilize it I am also a little rusty in python-
 # 5. How long did it take for you to complete the assignment?
-#      -total time in hours including reading the assignment and submitting the program-
+#      -3 hours-
 
 import json
 import os
